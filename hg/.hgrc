@@ -1,0 +1,6 @@
+[ui]
+username = Robert Smallshire <robert@smallshire.org.uk>
+
+[extensions]
+hgext.bookmarks =
+hggit =
