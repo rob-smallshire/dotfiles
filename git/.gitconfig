@@ -1,0 +1,52 @@
+[user]
+	name = Robert Smallshire
+	email = robert@smallshire.org.uk
+[credential]
+	helper = osxkeychain
+[core]
+	editor = sublime --wait
+	autocrlf = input
+	excludesfile = /Users/rjs/.gitignore_global
+[merge]
+    keepBackup = false;
+	tool = p4mergetool
+[mergetool "p4merge"]
+    cmd = p4merge "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+    keepTemporaries = false
+    trustExitCode = false
+    keepBackup = false
+[alias]
+	st = status
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    filelog = log -u
+    fl = log -u
+    dl = "!git ll -1"
+    dlc = diff --cached HEAD^
+    unstage = reset HEAD --
+    rewind = ![[ -z "$@" ]] && git reset --hard HEAD || git checkout HEAD
+    
+[push]
+	default = simple
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[mergetool "p4mergetool"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
+	trustExitCode = false
+[mergetool]
+	keepBackup = false
+[diff]
+	tool = p4mergetool
+[difftool "p4mergetool"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
+[git-p4]
+	detectRenames = true
+	detectCopies = true
+	preserveUser = true
+	allowMissingP4Users = true
