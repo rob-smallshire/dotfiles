@@ -16,5 +16,5 @@ ln -sfv "$DOTFILES_DIR/emacs/.spacemacs" ~
 ln -sfv "$DOTFILES_DIR/git/.gitconfig" ~
 ln -sfv "$DOTFILES_DIR/git/.gitignore_global" ~
 ln -sfv "$DOTFILES_DIR/hg/.hgrc" ~
-ln -sfv "$DOTFILES_DIR/hg/.hgignore_gloval" ~
+ln -sfv "$DOTFILES_DIR/hg/.hgignore_global" ~
 ln -sfv "$DOTFILES_DIR/atom/.atom" ~
