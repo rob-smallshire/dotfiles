@@ -1,0 +1,3 @@
+
+'atom-text-editor':
+  'ctrl-alt-y': 'hard-wrap:reflow-selection'

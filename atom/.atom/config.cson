@@ -1,0 +1,27 @@
+"*":
+  "exception-reporting":
+    userId: "60da69f3-130f-6798-188e-7d840d790286"
+  welcome:
+    showOnStartup: false
+  core:
+    themes: [
+      "one-light-ui"
+      "one-light-syntax"
+    ]
+    disabledPackages: [
+      "wrap-guide"
+    ]
+  editor:
+    invisibles: {}
+    tabLength: 4
+    showInvisibles: true
+    showIndentGuide: true
+    fontSize: 17
+  "multi-wrap-guide": {}
+".gfm.source":
+  "multi-wrap-guide":
+    columns: [
+      80
+    ]
+  editor:
+    preferredLineLength: 80

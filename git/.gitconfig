@@ -4,7 +4,7 @@
 [credential]
 	helper = osxkeychain
 [core]
-	editor = sublime --wait
+	editor = atom --wait
 	autocrlf = input
 	excludesfile = /Users/rjs/.gitignore_global
 [merge]
