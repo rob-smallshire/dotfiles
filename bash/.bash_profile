@@ -11,13 +11,6 @@ export LANG="en_GB.UTF-8"
 
 export PATH=$HOME/bin:$PATH
 
-# MacPorts Installer addition on 2012-11-12_at_17:26:57: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-export GRADLE_HOME=/Library/Gradle/gradle-1.4
-PATH=$PATH:$GRADLE_HOME/bin
-
 # Set git autocompletion and PS1 integration
 if [ -f $HOME/bin/git-completion.bash ]; then
   . $HOME/bin/git-completion.bash
@@ -73,14 +66,6 @@ function exitstatus {
 }
 
 PROMPT_COMMAND=exitstatus
-
-##
-# Your previous /Users/rjs/.bash_profile file was backed up as /Users/rjs/.bash_profile.macports-saved_2014-03-15_at_06:03:14
-##
-
-# MacPorts Installer addition on 2014-03-15_at_06:03:14: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-# Finished adapting your PATH environment variable for use with MacPorts.
 
 # Perforce
 export P4CONFIG=.p4config
