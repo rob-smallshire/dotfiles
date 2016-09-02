@@ -15,14 +15,20 @@ export PATH=$HOME/bin:$PATH
 if [ -f $HOME/bin/git-completion.bash ]; then
   . $HOME/bin/git-completion.bash
 fi
-if [ -f $HOME/bin/git-prompt.sh ]; then
-    . $HOME/bin/git-prompt.sh
+
+if [ -f /usr/local/etc/bash_completion ]; then
+  . /usr/local/etc/bash_completion
 fi
-GIT_PS1_SHOWDIRTYSTATE=true
 
 if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 fi
+
+if [ -f $HOME/bin/git-prompt.sh ]; then
+    . $HOME/bin/git-prompt.sh
+fi
+
+GIT_PS1_SHOWDIRTYSTATE=true
 
 
 BOLD="\[\033[1m\]"
@@ -74,7 +80,12 @@ PATH="/opt/pypy3-2.3.1-osx64/bin:${PATH}"
 export PATH
 
 # Setup for virtualenvwrapper
-export WORKON_HOME=$HOME/dev/virtualenvs
+if [[ $HOSTNAME == Suilven* ]]; then
+    export WORKON_HOME=$HOME/dev/virtualenvs
+else
+    export WORKON_HOME=$HOME/.virtualenvs
+fi
+
 export PROJECT_HOME=$HOME/dev
 VIRTUALENVWRAPPER_PYTHON=/Library/Frameworks/Python.framework/Versions/3.5/bin/python3
 source /Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper.sh
