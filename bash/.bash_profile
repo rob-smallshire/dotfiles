@@ -5,10 +5,6 @@ fi
 export LC_ALL="en_GB.UTF-8"
 export LANG="en_GB.UTF-8"
 
-##
-# Your previous /Users/rjs/.bash_profile file was backed up as /Users/rjs/.bash_profile.macports-saved_2012-11-12_at_17:26:57
-##
-
 export PATH=$HOME/bin:$PATH
 
 # Set git autocompletion and PS1 integration
@@ -40,20 +36,20 @@ PURPLE="\[\033[1;35m\]"
 OFF="\[\033[m\]"
 
 function exitstatus {
-    EXITSTATUS="$?"
-    HOST="\h"
-    USER="\u"
-    DIR="\w"
-    NEWLINE="\n"
-    DATE="\d"
-    TIME="\t"
+    local EXITSTATUS="$?"
+    local HOST="\h"
+    local USER="\u"
+    local DIR="\w"
+    local NEWLINE="\n"
+    local DATE="\d"
+    local TIME="\t"
 
     # Virtual Env
     if [[ $VIRTUAL_ENV != "" ]]
        then
-           VENV=" ${GOLD}(${VIRTUAL_ENV##*/})"
+           local VENV=" ${GOLD}(${VIRTUAL_ENV##*/})"
     else
-       VENV=''
+       local VENV=''
     fi
 
     # Basic Prompt
@@ -76,8 +72,9 @@ PROMPT_COMMAND=exitstatus
 # Perforce
 export P4CONFIG=.p4config
 
-PATH="/opt/pypy3-2.3.1-osx64/bin:${PATH}"
-export PATH
+# pyenv setup
+export PYENV_ROOT=/usr/local/var/pyenv
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # Setup for virtualenvwrapper
 if [[ $HOSTNAME == Suilven* ]]; then
@@ -87,10 +84,15 @@ else
 fi
 
 export PROJECT_HOME=$HOME/dev
-VIRTUALENVWRAPPER_PYTHON=/Library/Frameworks/Python.framework/Versions/3.5/bin/python3
-source /Library/Frameworks/Python.framework/Versions/3.5/bin/virtualenvwrapper.sh
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/var/pyenv/shims/python3
+if which pyenv > /dev/null; then
+    pyenv virtualenvwrapper
+fi
 
-# Setting PATH for Python 3.5
-# The orginal version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
-export PATH
+export PATH="$HOME/.npm-packages/bin:$PATH"
+
+export GOPATH="$HOME/dev/go"
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+test -d "${GOPATH}" || mkdir "${GOPATH}"
+test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
