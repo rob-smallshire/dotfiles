@@ -1,0 +1,73 @@
+
+
+1. Persisting model state.
+
+It is not obvious from the documentation how to persist the model state to
+files. We discovered parapy.core.io.FileWriter, and saw that the documentation
+is very sparse, so it's not clear if this is the proper approach. Furthermore
+we could find an option to save model state from the ParaPy GUI. Can you explain
+how model state can be persisted, and in what format?
+
+2. Embedding a Python shell.
+
+We are interested in embedding a Python REPL shell into the GUI application
+for the benefit of developers and advanced users, using wx.py.shell.Shell, for
+example.  Is this feasible, and approximately how much effort would it require?
+
+3. Runtime reloading of functions/methods (Python/AML). Late binding.
+
+Late binding in Lisp/AML allows replacement of functions at runtime, which can
+be of benefit during development. To what extent can we modify function
+definitions at runtime, or do redefinitions require the application to be
+restarted?
+
+4. Interactively change rules/formulas.
+
+To what extent is it possible to interactively change rules, relationships and
+formulas through the user interface? We're interested in both current
+capabilities and what is planned on the ParaPy development roadmap.
+
+5. In-scene manipulation and picking.
+
+The ParaPy GUI appears to support quite limited picking and in-scene
+graphical manipulation. What manipulation capabilities are included, what is
+planned, and what extension interfaces are provided to permit customisation?
+
+6. Facilities for dependancy tracing.
+
+What capabilities does ParyPy provide for tracing dependants and dependencies
+between subclasses of Base objects?  The context here is deletion of model
+objects which have dependants or are dependencies of other model objects, and
+that applications need to be able to discover transitive dependency
+relationships programmatically to prevent or allow such actions.
+
+7. Interactively adding and deleting objects.
+
+We could not discover how to interactively and directly add new objects through
+the ParaPy GUI. Are all parent-child cardinalities controlled by Inputs? Is this
+possible, and if so, how?  The same question applies to deletion of model
+objects.
+
+8. Documentation and role of the parapy.gui package.
+
+We couldn't locate any documentation for the parapy.gui package? Is this GUI
+provided as an example, or is it intended as an application development
+framework to be extended and heavily customised by your clients?  Alternatively,
+do you expect serious interactive, graphical applications of ParaPy to require
+bespoke front-end development from scratch?
+
+9. Automated tests for model elements.
+
+Do you have example of unit tests for ParaPy model elements (subclasses of
+Base), using the Python Standard Library unittest module, or third-party testing
+tools such as py.test? How might we pursue Test-Driven Development (TDD) with
+ParaPy?
+
+10. Licensing models.
+
+What licensing options are available? Currently we have node-locked licenses,
+which while appropriate for developers' individual machines, may not be
+appropriate for ephemeral virtual servers in a continuous delivery
+(build-test-package-deploy) pipeline.
+
+11. 

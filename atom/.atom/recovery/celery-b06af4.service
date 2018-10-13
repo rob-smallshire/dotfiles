@@ -1,0 +1,18 @@
+[Unit]
+Description=Celery Service
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+RuntimeDirectory=celery
+RuntimeDirectoryMode=0775
+PIDFile=/var/run/celery/single.pid
+EnvironmentFile=/etc/celery.d/celery.conf
+WorkingDirectory=/home/ubuntu/cosmic-cloud
+ExecStart=/home/ubuntu/.virtualenvs/cosmic-cloud/bin/celery multi start single-worker -A adder --pidfile=/var/run/celery/single.pid "-c 4 -Q celery -l INFO"
+ExecStop=/home/ubuntu/.virtualenvs/cosmic-cloud/bin/celery multi stopwait single-worker --pidfile=/var/run/celery/single.pid
+ExecReload=/home/ubuntu/.virtualenvs/cosmic-cloud/bin/celery multi restart single-worker --pidfile=/var/run/celery/single.pid
+[Install]
+WantedBy=multi-user.target

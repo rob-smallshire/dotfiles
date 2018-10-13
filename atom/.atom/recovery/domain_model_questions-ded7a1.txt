@@ -1,0 +1,71 @@
+Questions arising from PUSH2-FMDomainmodel-050418-0852-1302.pdf
+
+1. Is a single layout case sufficient for the spike? YES
+
+2. Is the Space-Manager a single model element? How complex is it?
+   I couldn't identify any internal structure.  YES. THERE IS
+   INTERNAL COMPLEXITY
+
+3. I see GenericModule also has-a Space-Manager. Is this another
+   instance of the Space-Manager which is associated with the root
+   layout case, or is it a different class?  COULD BE A SECOND
+   INSTANCE OF THE SAME CLASS.
+
+
+Questions arising from PUSH2-FMModules-050418-0851-1296.pdf
+
+1. I couldn't directly correlate the names on this model with
+   the names any the names in the Simple Structure diagram.
+   Does SimpleStructure require all the complexity shown on the
+   PUSH2-FMSimpleStructure-050418-0851-1298.pdf model?  NOT
+   REQUIRED FOR SPIKE.
+
+2. Is the Decks submodel required for the prototype? YES
+
+3. There is a Weight-Export node. Is this required for the Weight
+   Estimation Exporter to function? NOT AS A TREE ELEMENT
+
+Questions arising from PUSH2-FMRooms-050418-0851-1300.pdf
+
+1. How does this model relate to the overall domain model? I can't
+   locate any of these three classes on the main domain model
+   diagram. NOT REQUIRED FOR MINIMAL SCOPE.
+
+Questions arising from PUSH2-FMFunctionalVolumes-050418-0851-1292.pdf
+
+1. It appears that Functional Volume has a dependency on Deck. Does
+   this imply that a deck model is required for a useful
+   FunctionalVolume? THIS FINE.
+
+2. Is the placement algorithm required? (Placement Algorithm
+   Properties Mixin)  Is this complex?  NOT REQUIRED FOR SPIKE.
+
+
+General
+
+1. Will the container elements (e.g. EquipmentGroup, FunctionalVolumes)
+   need to be explicitly modelled in ParaPy, or will the ParaPy
+   part sequences suffice?  Do these collections need to model more
+   than just cardinality constraints?
+
+2. Some things I saw in the demo: Laydown areas? How are these
+   modelled? MODELLED SIMILAR TO ACCESS WAYS.
+
+3. What does a minimum viable model look like?
+
+   - Layout (root)
+     - Space-Manager - complex.
+     - Equipment
+       - 1? or more? 6?
+     - Topside
+       - Generic-Module
+         - Functional-Volume
+           - Volume
+         - Deck
+       - Global-Layout-Element
+         - Flare-Tower
+         - Living Quarters
+           - Helideck
+           - Lifeboats
+
+   Estimate 15-21 model elements are required.

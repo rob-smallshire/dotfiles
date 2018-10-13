@@ -1,0 +1,105 @@
+- hosts: message-broker-hosts
+  name: Gather facts from message-broker-hosts
+  vars:
+      ansible_python_interpreter: /usr/bin/python3
+  tasks: [ ]
+
+- hosts: celery-worker-hosts message-broker-hosts
+  vars:
+      ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+    - name: Wait for the remote system to become available
+      wait_for_connection:
+          timeout: 300
+
+    - name: "Working around Ansible lameness on Ubuntu..."
+      become: yes
+      become_method: sudo
+      apt:
+        pkg: "{{ item }}"
+        state: latest
+        update_cache: yes
+        cache_valid_time: 3600
+      with_items:
+        - aptitude
+
+    - name: Update apt repositories
+      become: yes
+      become_method: sudo
+      apt:
+        update_cache: yes
+        upgrade: yes
+
+# Ultimately, we should probably download and compile our own Python into /opt
+# so we have precise control over the version of Python used, rather than
+# relying on whatever Ubuntu has packaged up for us.
+
+    - name: Install python3-venv
+      become: yes
+      become_method: sudo
+      apt:
+        name: python3-venv
+        state: present
+
+    - name: Install python3-pip
+      become: yes
+      become_method: sudo
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Upgrade pip in a virtualenv
+      pip:
+        virtualenv_command: /usr/bin/pyvenv
+        virtualenv: ~/.virtualenvs/cosmic-cloud
+        name: pip
+        state: latest
+
+    - name: Install Celery
+      pip:
+        virtualenv_command: /usr/bin/pyvenv
+        virtualenv: ~/.virtualenvs/cosmic-cloud
+        name: celery
+        version: 3.1.25
+
+    - name: Ensure ~/cosmic-cloud/ exists
+      file:
+        path: /home/ubuntu/cosmic-cloud/
+        state: directory
+        owner: ubuntu
+
+    - name: Deploy celeryconfig.py
+      template:
+        src: celeryconfig.py.j2
+        dest: /home/ubuntu/cosmic-cloud/celeryconfig.py
+        owner: ubuntu
+      vars:
+        user: merlin
+        password: avalon
+        host: "{{ groups['message-broker-hosts'][0] }}"
+        vhost: camelot
+        module: adder
+
+    - name: Deploy worker.py
+      copy:
+        src: adder.py
+        dest: /home/ubuntu/cosmic-cloud/adder.py
+        owner: ubuntu
+
+    - name: Install python-setuptools (for Python 2, to run supervisord)
+      become: yes
+      become_method: sudo
+      apt:
+        name: python-setuptools
+        state: present
+
+    - name: Install supervisor
+      become: yes
+      become_method: sudo
+      easy_install:
+        name: supervisor
+
+    - name: Make /etc/supervisor
+      become: yes
+      become_method: sudo

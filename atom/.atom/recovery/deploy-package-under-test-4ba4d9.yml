@@ -1,0 +1,54 @@
+- hosts: message-broker-hosts
+  name: Gather facts from message-broker-hosts
+  tasks: [ ]
+
+- hosts: celery-worker-hosts
+  vars:
+    sdist_basename: asm68-0.9.0
+    sdist_dirpath: /Users/rjs/dev/asm68/dist
+    sdist_filename: "{{ sdist_basename }}.tar.gz"
+    sdist_filepath: "{{ sdist_dirpath }}/{{ sdist_filename }}"
+  tasks:
+
+    - name: Wait for the remote system to become available
+      wait_for_connection:
+          timeout: 300
+
+    - name: Ensure ~/cosmic-cloud/ exists
+      file:
+        path: /home/ubuntu/cosmic-cloud/
+        state: directory
+        owner: ubuntu
+
+    - name: "Deploy the source distribution for the {{ sdist_basename }}"
+      unarchive:
+        src: "{{ sdist_filepath }}"
+        dest: "/home/ubuntu/cosmic-cloud/"
+        owner: ubuntu
+
+    - name: "Install {{ sdist_basename }} in the virtual environment"
+      pip:
+        virtualenv_command: /usr/bin/pyvenv
+        virtualenv: ~/.virtualenvs/cosmic-cloud
+        name: "/home/ubuntu/cosmic-cloud/{{ sdist_basename }}"
+        extra_args: '-e'
+
+    - name: 
+
+  handlers:
+
+    - name: Restart supervisord
+      become: yes
+      become_method: sudo
+      systemd:
+        name: supervisord
+        state: restarted
+      listen: "restart supervisord"
+
+    - name: Restart celery_worker
+      become: yes
+      become_method: sudo
+      supervisorctl:
+        name: celery_worker
+        state: restarted
+      listen: "restart celery_worker"

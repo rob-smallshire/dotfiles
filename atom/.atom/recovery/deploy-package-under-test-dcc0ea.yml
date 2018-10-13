@@ -1,0 +1,131 @@
+- hosts: message-broker-hosts
+  name: Gather facts from message-broker-hosts
+  tasks: [ ]
+
+- hosts: celery-worker-hosts
+  vars:
+    system_under_test_basename: asm68-0.9.0
+    sdist_dirpath: /Users/rjs/dev/asm68/dist
+    sdist_archive_filename: "{{ system_under_test_basename }}.tar.gz"
+    sdist_archive_filepath: "{{ sdist_dirpath }}/{{ system_under_test_filename }}"
+  tasks:
+
+    - name: Wait for the remote system to become available
+      wait_for_connection:
+          timeout: 300
+
+    - name: Ensure ~/cosmic-cloud/ exists
+      file:
+        path: /home/ubuntu/cosmic-cloud/
+        state: directory
+        owner: ubuntu
+
+    - name: "Deploy the source distribute for the {{ system_under_test_basename }}"
+      copy:
+        src: "{{ sdist_archive_filepath }}"
+        dest: "/home/ubuntu/cosmic-cloud/{{ sdist_archive_filename }}"
+        owner: ubuntu
+
+    - name: Deploy /etc/logrotate.d/celery_worker
+      become: yes
+      become_method: sudo
+      copy:
+        src: celery_worker_log_rotate
+        dest: /etc/logrotate.d/celery_worker
+
+    - name: Install python-setuptools (for Python 2, to run supervisord)
+      become: yes
+      become_method: sudo
+      apt:
+        name: python-setuptools
+        state: present
+
+    - name: Install supervisor
+      become: yes
+      become_method: sudo
+      easy_install:
+        name: supervisor
+      notify:
+        - "restart supervisord"
+
+    - name: Make /etc/supervisor/
+      become: yes
+      become_method: sudo
+      file:
+        path: /etc/supervisor/
+        state: directory
+      notify:
+        - "restart supervisord"
+
+    - name: Populate /etc/supervisor/supervisord.conf
+      become: yes
+      become_method: sudo
+      shell: echo_supervisord_conf > /etc/supervisor/supervisord.conf
+      args:
+        creates: /etc/supervisor/supervisord.conf
+      notify:
+        - "restart supervisord"
+
+    - name: Add a reference to conf.d/*.conf
+      become: yes
+      become_method: sudo
+      blockinfile:
+        path: /etc/supervisor/supervisord.conf
+        block: |
+          [include]
+          files=conf.d/*.conf
+      notify:
+        - "restart supervisord"
+
+    - name: Deploy /etc/systemd/system/supervisord.service
+      become: yes
+      become_method: sudo
+      copy:
+        src: supervisord.service
+        dest: /etc/systemd/system/supervisord.service
+      notify:
+        - "restart supervisord"
+
+    - name: Make /etc/supervisor/conf.d/
+      become: yes
+      become_method: sudo
+      file:
+        path: /etc/supervisor/conf.d/
+        state: directory
+      notify:
+        - "restart supervisord"
+
+    - name: Deploy /etc/supervisor/conf.d/celery_worker.conf
+      become: yes
+      become_method: sudo
+      copy:
+        src: celery_worker.conf
+        dest: /etc/supervisor/conf.d/celery_worker.conf
+      notify:
+       - "restart supervisord"
+
+    - name: Ensure /var/log/celery_worker/ exists
+      become: yes
+      become_method: sudo
+      file:
+        path: /var/log/celery_worker
+        state: directory
+        owner: root
+
+  handlers:
+
+    - name: Restart supervisord
+      become: yes
+      become_method: sudo
+      systemd:
+        name: supervisord
+        state: restarted
+      listen: "restart supervisord"
+
+    - name: Restart celery_worker
+      become: yes
+      become_method: sudo
+      supervisorctl:
+        name: celery_worker
+        state: restarted
+      listen: "restart celery_worker"

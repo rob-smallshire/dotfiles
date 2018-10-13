@@ -90,9 +90,15 @@ if which pyenv > /dev/null; then
 fi
 
 export PATH="$HOME/.npm-packages/bin:$PATH"
-
+export PATH="/usr/local/sbin:$PATH"
 export GOPATH="$HOME/dev/go"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 test -d "${GOPATH}" || mkdir "${GOPATH}"
 test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/rjs/google-cloud-sdk/path.bash.inc' ]; then source '/Users/rjs/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/rjs/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/rjs/google-cloud-sdk/completion.bash.inc'; fi

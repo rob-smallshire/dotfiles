@@ -1,4 +1,6 @@
 "*":
+  autosave:
+    enabled: true
   core:
     telemetryConsent: "limited"
     themes: [
@@ -9,3 +11,14 @@
     tabLength: 4
   "exception-reporting":
     userId: "05e387d7-0971-427c-b2c0-b07b64adece3"
+  welcome:
+    showOnStartup: false
+".hashicorp.interpolation.text":
+  editor:
+    tabLength: 2
+".source.terraform":
+  editor:
+    tabLength: 2
+".source.yaml":
+  editor:
+    tabLength: 2

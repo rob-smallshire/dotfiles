@@ -1,0 +1,29 @@
+
+
+1. How to persist the model state?
+
+It is not obvious from the documentation how to persist the model state to
+files. We discovered parapy.core.io.FileWriter, 
+
+
+2. Runtime reloading of functions/methods (Python/AML). Late binding.
+
+3. Embedded REPL in the user interface for manipulation of the model.
+
+4. Interactively change rules/formulas.
+
+5. In-scene manipulation and picking - customisation thereof
+
+6. Tracing dependencies - dependants and dependees.
+
+7. Interactively adding objects.
+
+8. Interactively deleting objects.
+
+9. Documentation for the parapy.gui package.
+
+10. Examples of tests for model elements?
+
+11. Licensing models? Node locked licenses.
+
+12.

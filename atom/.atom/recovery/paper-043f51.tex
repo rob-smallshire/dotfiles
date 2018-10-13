@@ -1,0 +1,121 @@
+\documentclass[10pt,conference]{IEEEtran}
+
+\usepackage{cite}
+
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{todonotes}
+\presetkeys{todonotes}{inline}{}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{rotating}
+
+\newcommand{\xmark}{\ding{55}}%
+
+\newcommand{\specialcell}[2][c]{%
+\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\newcommand{\COULDCUT}[1]{\textcolor{green}{#1}}
+
+\usepackage[many]{tcolorbox}
+\newtcolorbox{mybox}[1]{%
+    tikznode boxed title,
+    enhanced,
+    arc=0mm,
+    interior style={white},
+    attach boxed title to top center= {yshift=-\tcboxedtitleheight/2},
+    fonttitle=\bfseries,
+    colbacktitle=white,coltitle=black,
+    boxed title style={size=normal,colframe=white,boxrule=0pt},
+    title={#1}}
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{M}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usepackage{listings}
+\lstset{
+  language=Python, % choose the language of the code
+  showspaces=false, % show spaces adding particular underscores
+  showstringspaces=false, % underline spaces within strings
+  showtabs=false, % show tabs within strings adding particular underscores
+  tabsize=8, % sets default tabsize to 2 spaces
+  captionpos=b, % sets the caption-position to bottom
+  mathescape=true, % activates special behaviour of the dollar sign
+  basicstyle=\footnotesize\tt,
+  columns=fullflexible,
+  xleftmargin=2em,
+  %commentstyle=\rmfamily\itshape,
+  morekeywords={},
+  escapeinside={(*@}{@*)},
+  numbers=left,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red} {$\hookrightarrow$}\space}
+}
+
+\IEEEoverridecommandlockouts{}
+
+\begin{document}
+
+\author{David R.~MacIver, Robert Smallshire}
+\title{Property-Based Testing For All}
+
+\maketitle
+
+\begin{abstract}
+This is a talk about what we learned in the course of implementing \emph{Hypothesis}\footnote{\url{https://hypothesis.works}}, a property-based testing ~\cite{DBLP:conf/erlang/ArtsHJW06} library for Python.
+``Property-based testing'' is a term used to describe a family of tools that makes it easy for developers to extend their normal automated testing with tests parametrized by generated data.
+Property-based testing originally comes from the Haskell library \emph{QuickCheck}~\cite{DBLP:conf/icfp/ClaessenH00}.
+QuickCheck's goal was not to advance the state of software testing research, but to make it ``easily available to Haskell programmers''. Hypothesis continues this project by trying to make these techniques accessible to \emph{non}-Haskell programmers.
+
+By consistently focusing on user experience,
+we had to reexamine many of the basic assumptions of how the tool worked,
+and answer novel research questions that would not otherwise have occurred to us.
+The result has been a pleasing symbiosis of research and engineering,
+with each aspect of the project feeding into the other.
+Rather than development being a simple matter of ``doing the work'' on existing research,
+having to do the work was the primary driver of our research questions.
+
+In this talk we will discuss our experiences as a developer and a user of the project,
+and propose some general lessons for other projects that wish to apply existing research to the development of practical tools.
+\end{abstract}
+
+A basic question we want to discuss is this:
+QuickCheck is widely known, relatively easy to implement (with some caveats we will discuss), and widely used in the functional programming community.
+Additionally, whenever you show it to practitioners (of any language) they get very excited,
+treating decades old ideas as if they were cutting edge.
+Given this, why is it that it has not seen widespread adoption as a testing technique outside of functional programming?
+
+Initially we, perhaps naively, assumed that a tool that was accessible to Haskell programmers would be accessible more broadly,
+and Hypothesis began its life as a fairly naive QuickCheck port.
+This was not written with any particular research goal in mind, but simply because it was a tool we wanted to exist.
+While there were a number of deviations from QuickCheck in our implementation,
+these were primarily to support the differences between Haskell and Python, and to allow it to fit more easily into the Python testing ecosystem.
+
+What we found was that Python programmers were just as enthusiastic about the idea as Haskell ones and, somewhat to our surprise, people started using even our initial, fairly basic, prototype!
+However, the enthusiasm came along with many questions: Many of the features of the library were not obvious to people who had not previously used QuickCheck,
+and this required us to make many improvements to functionality and the basic model, including:
+
+\begin{itemize}
+\item Support for mutable data, including e.g. database models.
+\item An example database, for developers concerned about test repeatability: If a test fails and then passes after a change, does that indicate a genuine fix or just luck of the draw?
+\item Better support for retaining test-case reduction when composing together data generators.
+\item Higher quality test-case reduction, based on ideas similar to those found in C-Reduce~\cite{DBLP:conf/pldi/RegehrCCEEY12}.
+\end{itemize}
+
+TODO: Somehow round this off to an interesting conclusion.
+
+The talk will be illustrated by examples drawn from various projects in the energy sector
+
+\begin{IEEEbiographynophoto}{David R.~MacIver} is a recent arrival to academia. After about seven years in industry, in 2013 he wrote Hypothesis, and since 2014 it has been his main project.
+In 2017 he began a PhD at Imperial College, using Hypothesis as a vehicle to study the general problem of test-case reduction.
+\end{IEEEbiographynophoto}
+\begin{IEEEbiographynophoto}{Robert Smallshire} is consultant programmer with twenty years professional experience developing software in the oil and gas, and latterly renewable, energy industries. He has become an avid user of property-based testing in industrial contexts since first encountering Hypothesis in 2014.
+\end{IEEEbiographynophoto}
+
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,references}
+
+\end{document}

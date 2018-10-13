@@ -1,0 +1,388 @@
+{
+  "id": "vessel_two_phase_vertical",
+  "calculators": [
+    {
+      "id": "FeedFlow",
+      "outputs": [
+        {
+          "id": "inlet_gas_mass_density",
+          "type": "real",
+          "value": 13.8,
+          "unit": "kg/m³"
+        },
+        {
+          "id": "inlet_gas_mass_flow",
+          "type": "real",
+          "value": 33.991,
+          "unit": "kg/hr"
+        },
+        {
+          "id": "inlet_gas_volumetric_flow",
+          "type": "real",
+          "value": 2.4605,
+          "unit": "m³/hr"
+        },
+        {
+          "id": "inlet_oil_mass_density",
+          "type": "real",
+          "value": 746,
+          "unit": "kg/m³"
+        },
+        {
+          "id": "inlet_oil_mass_flow",
+          "type": "real",
+          "value": 76.452,
+          "unit": "kg/hr"
+        },
+        {
+          "id": "inlet_oil_volumetric_flow",
+          "type": "real",
+          "value": 0.10249,
+          "unit": "m³/hr"
+        },
+        {
+          "id": "inlet_water_mass_density",
+          "type": "real",
+          "value": 993,
+          "unit": "kg/m³"
+        },
+        {
+          "id": "inlet_water_mass_flow",
+          "type": "real",
+          "value": 6.5139,
+          "unit": "kg/hr"
+        },
+        {
+          "id": "inlet_water_volumetric_flow",
+          "type": "real",
+          "value": 0.00656,
+          "unit": "m³/hr"
+        }
+      ],
+      "inputs": []
+    },
+    {
+      "id": "OperatingConditions",
+      "outputs": [
+        {
+          "id": "pressure_maximum_design",
+          "type": "real",
+          "value": 3.5,
+          "unit": "barg"
+        },
+        {
+          "id": "pressure_minimum_design",
+          "type": "real",
+          "value": -1.0,
+          "unit": "barg"
+        },
+        {
+          "id": "temperature_maximum_design",
+          "type": "real",
+          "value": 74,
+          "unit": "°C"
+        },
+        {
+          "id": "temperature_minimum_design",
+          "type": "real",
+          "value": -19,
+          "unit": "°C"
+        }
+      ],
+      "inputs": []
+    },
+    {
+      "id": "Materials",
+      "outputs": [
+        {
+          "id": "vessel_cladding_material_of_construction",
+          "type": "string",
+          "value": "316 SS",
+          "unit": "#"
+        },
+        {
+          "id": "vessel_material_of_construction",
+          "type": "string",
+          "value": "316 SS",
+          "unit": "#"
+        }
+      ],
+      "inputs": []
+    },
+    {
+      "id": "VesselNozzles",
+      "outputs": [
+        {
+          "id": "vessel_inlet_nozzle_size",
+          "type": "real",
+          "value": 2,
+          "unit": "inches"
+        },
+        {
+          "id": "vessel_liquid_nozzle_size",
+          "type": "real",
+          "value": 2,
+          "unit": "inches"
+        },
+        {
+          "id": "vessel_nozzle_class",
+          "type": "string",
+          "value": 150,
+        },
+        {
+          "id": "vessel_vapour_nozzle_size",
+          "type": "real",
+          "value": 2,
+          "unit": "inches"
+        }
+      ],
+      "inputs": []
+    },
+    {
+      "id": "Vessel2PVGeometry",
+      "outputs": [
+        {
+          "id": "vertical_vessel_length",
+          "type": "real",
+          "value": 5.0,
+          "unit": "m"
+        },
+        {
+          "id": "vertical_vessel_vapour_outlet_device_k_value",
+          "type": "real",
+          "value": 0.08,
+          "unit": "m/s"
+        },
+        {
+          "id": "vessel_footprint",
+          "type": "real",
+          "value": 0.0,
+          "unit": "m²"
+        },
+        {
+          "id": "vessel_inlet_nozzle_to_top_tan_line_height",
+          "type": "real",
+          "value": 0.00,
+          "unit": "m"
+        },
+        {
+          "id": "vessel_inlet_nozzle_to_vapour_outlet_device_height",
+          "type": "real",
+          "value": 0.90,
+          "unit": "m"
+        },
+        {
+          "id": "vessel_internal_diameter",
+          "type": "real",
+          "value": 0.0,
+          "unit": "m"
+        },
+        {
+          "id": "vessel_lah_to_lahh_band_controlling_parameter",
+          "type": "real",
+          "value": 30,
+        },
+        {
+          "id": "vessel_lahh_to_inlet_nozzle_height",
+          "type": "real",
+          "value": 0.30,
+          "unit": "m"
+        },
+        {
+          "id": "vessel_lal_to_nll_band_controlling_parameter",
+          "type": "real",
+          "value": 30,
+        },
+        {
+          "id": "vessel_lall_to_lal_band_controlling_parameter",
+          "type": "real",
+          "value": 30,
+        },
+        {
+          "id": "vessel_ld_ratio",
+          "type": "real",
+          "value": 129,
+        },
+        {
+          "id": "vessel_manway_size",
+          "type": "real",
+          "value": 0.0,
+          "unit": "inches"
+        },
+        {
+          "id": "vessel_nll_to_lah_band_controlling_parameter",
+          "type": "real",
+          "value": 30,
+        },
+        {
+          "id": "vessel_number_of_manways",
+          "type": "real",
+          "value": 0,
+        },
+        {
+          "id": "vessel_surge_volume",
+          "type": "real",
+          "value": 0.00,
+          "unit": "m³"
+        },
+        {
+          "id": "vessel_vapour_outlet_device_height",
+          "type": "real",
+          "value": 0.15,
+          "unit": "m"
+        },
+        {
+          "id": "vessel_vapour_outlet_device_to_top_tan_line_height",
+          "type": "real",
+          "value": 0.15,
+          "unit": "m"
+        }
+      ],
+      "inputs": []
+    },
+    {
+      "id": "VesselMechanical",
+      "outputs": [
+        {
+          "id": "vessel_corrosion_allowance",
+          "type": "real",
+          "value": 0,
+          "unit": "mm"
+        },
+        {
+          "id": "vessel_head_thickness",
+          "type": "real",
+          "value": 1.00,
+          "unit": "mm"
+        },
+        {
+          "id": "vessel_joint_efficiency",
+          "type": "real",
+          "value": 1,
+        },
+        {
+          "id": "vessel_material_allowable_stress",
+          "type": "real",
+          "value": 2153,
+          "unit": "barg"
+        },
+        {
+          "id": "vessel_shell_thickness",
+          "type": "real",
+          "value": 1.00,
+          "unit": "mm"
+        }
+      ],
+      "inputs": []
+    },
+    {
+      "id": "VesselWeights",
+      "outputs": [
+        {
+          "id": "vessel_dry_weight",
+          "type": "real",
+          "value": 0.05,
+          "unit": "tonnes"
+        },
+        {
+          "id": "vessel_head_weight",
+          "type": "real",
+          "value": 0.00,
+          "unit": "tonnes"
+        },
+        {
+          "id": "vessel_internals_weight",
+          "type": "real",
+          "value": 0.00,
+          "unit": "tonnes"
+        },
+        {
+          "id": "vessel_nozzle_manway_weight",
+          "type": "real",
+          "value": 0.01,
+          "unit": "tonnes"
+        },
+        {
+          "id": "vessel_operating_weight",
+          "type": "real",
+          "value": 0.06,
+          "unit": "tonnes"
+        },
+        {
+          "id": "vessel_shell_weight",
+          "type": "real",
+          "value": 0.00,
+          "unit": "tonnes"
+        },
+        {
+          "id": "vessel_skirt_weight",
+          "type": "real",
+          "value": 0.04,
+          "unit": "tonnes"
+        }
+      ],
+      "inputs": []
+    }
+  ],
+  "designBasisData": {
+    "maximumAmbientTemperature": 25.0,
+    "minimumAmbientTemperature": -19.0
+  },
+  "simulationData": {
+    "streamData": [
+      {
+        "feedStream": "002",
+        "name": "20VA001",
+        "operatingPressure": {
+          "unitOfMeasure": "barg",
+          "value": 15.0
+        },
+        "operatingTemperature": {
+          "unitOfMeasure": "C",
+          "value": 43.7959265710654
+        },
+        "inlet": [
+          {
+            "inletGasMassDensity": {
+              "unitOfMeasure": "kg/m",
+              "value": 13.8142274734602
+            },
+            "inletWaterMassFlow": {
+              "unitOfMeasure": "kg/m",
+              "value": 6.51394337308712
+            },
+            "inletGasMassFlow": {
+              "unitOfMeasure": "kg/m",
+              "value": 33.9905166541822
+            },
+            "inletCO2Composition": {
+              "unitOfMeasure": null,
+              "value": 0.1
+            },
+            "inletOilMassDensity": {
+              "unitOfMeasure": "kg/m",
+              "value": 745.951213606608
+            },
+            "inletOilMassFlow": {
+              "unitOfMeasure": "kg/m",
+              "value": 76.4523215505324
+            },
+            "inletWaterMassDensity": {
+              "unitOfMeasure": "kg/m",
+              "value": 992.654146887524
+            },
+            "inletH2SComposition": {
+              "unitOfMeasure": null,
+              "value": 0.1
+            },
+            "inletH2OComposition": {
+              "unitOfMeasure": null,
+              "value": 0.1
+            }
+          }
+        ],
+        "outlet": []
+      }
+    ]
+  }
+}

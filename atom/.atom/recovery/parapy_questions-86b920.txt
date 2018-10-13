@@ -1,0 +1,51 @@
+
+
+1. Persisting model state.
+
+It is not obvious from the documentation how to persist the model state to
+files. We discovered parapy.core.io.FileWriter, and saw that the documentation
+is very sparse, so it's not clear if this is the proper approach. Furthermore
+we could find an option to save model state from the ParaPy GUI. Can you explain
+how model state can be persisted, and in what format?
+
+2. Embedding a Python shell.
+
+We are interested in embedding a Python REPL shell into the GUI application
+for the benefit of developers and advanced users, using wx.py.shell.Shell, for
+example.  Is this feasible, and approximately how much effort would it require?
+
+3. Runtime reloading of functions/methods (Python/AML). Late binding.
+
+Late binding in Lisp/AML allows replacement of functions at runtime, which can
+be of benefit during development. To what extent can we modify function
+definitions at runtime, or do redefinitions require the application to be
+restarted?
+
+4. Interactively change rules/formulas.
+
+To what extent is it possible to interactively change rules, relationships and
+formulas through the user interface? We're interested in both current
+capabilities and what is planned on the ParaPy development roadmap.
+
+5. In-scene manipulation and picking
+
+The ParaPy GUI appears to support quite limited picking and in-scene
+graphical manipulation. What manipulation capabilities are included, what is
+planned, and what extension interfaces are provided to permit customisation?
+
+6. What facilities are provided for tracing 
+
+
+Tracing dependencies - dependants and dependancy.
+
+7. Interactively adding objects.
+
+8. Interactively deleting objects.
+
+9. Documentation for the parapy.gui package.
+
+10. Examples of tests for model elements?
+
+11. Licensing models? Node locked licenses.
+
+12.

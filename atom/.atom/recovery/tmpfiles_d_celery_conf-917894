@@ -1,0 +1,2 @@
+d /var/run/celery_worker 0755 ubuntu ubuntu -
+d /var/log/celery_worker 0755 ubuntu ubuntu -

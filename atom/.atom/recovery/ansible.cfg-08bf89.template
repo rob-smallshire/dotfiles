@@ -1,0 +1,12 @@
+[defaults]
+roles_path = galaxy:roles
+host_key_checking = False
+inventory = terraform-inventory
+private_key_file = ~/.ssh/rob-key-pair-ireland.pem
+
+[ssh_connection]
+# These next two lines shorten the length of paths for Unix domain sockets
+# as default paths for Amazon EC2 are longer than the 108 character limit
+# See: https://stackoverflow.com/a/43080245/107907
+control_path=%(directory)s/%%h-%%r
+control_path_dir=~/.ansible/cp
